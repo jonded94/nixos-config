@@ -4,6 +4,11 @@
 
 { config, lib, pkgs, ... }:
 
+let
+  secrets = {
+    sshKeys = import ./secrets/ssh-keys.nix;
+  };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -63,6 +68,12 @@
   environment.systemPackages = with pkgs; [
       git
   ];
+
+  users.users = {
+    root = {
+      openssh.authorizedKeys.keys = [ secrets.sshKeys.root ];
+    };
+  };
 
   services = {
     openssh = {
