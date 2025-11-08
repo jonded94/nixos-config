@@ -67,7 +67,7 @@
   services = {
     openssh = {
       enable = true;
-      PermitRootLogin = "yes";
+      settings.PermitRootLogin = "yes";
     };
     gitea = {
       enable = true;
