@@ -16,7 +16,10 @@
     kernelPackages = pkgs.linuxPackages_latest;
 
     # Enable mdadm support
-    swraid.enable = true;
+    swraid {
+      enable = true;
+      mdadmConf = "PROGRAM ${pkgs.coreutils}/bin/true";
+    };
 
     loader.grub = {
       enable = true;
@@ -64,7 +67,7 @@
   services = {
     openssh = {
       enable = true;
-      permitRootLogin = "yes";
+      PermitRootLogin = "yes";
     };
     gitea = {
       enable = true;
