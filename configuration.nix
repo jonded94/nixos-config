@@ -65,7 +65,7 @@
     openssh = {
       enable = true;
       permitRootLogin = "yes";
-    }
+    };
     gitea = {
       enable = true;
     };
@@ -81,7 +81,7 @@
   hardware = {
     intel-gpu-tools.enable = true;
     enableRedistributableFirmware = true;
-  }
+  };
 
   nixpkgs.config.allowUnfree = true;
 
