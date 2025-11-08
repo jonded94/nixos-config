@@ -16,7 +16,7 @@
     kernelPackages = pkgs.linuxPackages_latest;
 
     # Enable mdadm support
-    swraid {
+    swraid = {
       enable = true;
       mdadmConf = "PROGRAM ${pkgs.coreutils}/bin/true";
     };
