@@ -89,12 +89,14 @@ in
       enable = true;
       settings.PermitRootLogin = "yes";
     };
-    gitea = {
-      enable = true;
-    };
     k3s = {
       enable = true;
       role = "server";
+      manifests = {
+        # librespeed = {
+        #   source = ./k8s/librespeed.yaml;
+        # };
+      };
     };
   };
 
