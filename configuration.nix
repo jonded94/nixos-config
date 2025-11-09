@@ -2,7 +2,12 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   secrets = {
@@ -10,12 +15,12 @@ let
   };
 in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
-      ./disko.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
+    ./disko.nix
+  ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
@@ -58,15 +63,19 @@ in
 
   # Select internationalisation properties.
   console = {
-  #   font = "Lat2-Terminus16";
-      keyMap = "de";
-  #   useXkbConfig = true; # use xkb.options in tty.
+    #   font = "Lat2-Terminus16";
+    keyMap = "de";
+    #   useXkbConfig = true; # use xkb.options in tty.
   };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-      git
+    htop
+    git
+    pciutils # provides lspci
+    nvme-cli # provides nvme
+    usbutils # provides lsusb
   ];
 
   users.users = {
@@ -82,6 +91,10 @@ in
     };
     gitea = {
       enable = true;
+    };
+    k3s = {
+      enable = true;
+      role = "server";
     };
   };
 
