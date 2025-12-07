@@ -1,0 +1,20 @@
+# Kube Prometheus Stack configuration
+# Customize these values as needed
+
+prometheus:
+  prometheusSpec:
+    retention: 30d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 50Gi
+
+grafana:
+  enabled: true
+  adminPassword: changeme
+
+alertmanager:
+  enabled: true

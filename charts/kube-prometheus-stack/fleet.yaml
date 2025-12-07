@@ -1,0 +1,8 @@
+defaultNamespace: monitoring
+helm:
+  chart: oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack
+  releaseName: kube-prometheus-stack
+  takeOwnership: false
+  maxHistory: 3
+  valuesFiles:
+    - values.yaml
