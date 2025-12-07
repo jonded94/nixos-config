@@ -13,6 +13,7 @@ let
   secrets = {
     sshKeys = import ./secrets/ssh-keys.nix;
   };
+  powertop-master = pkgs.callPackage ./pkgs/powertop-master.nix { };
 in
 {
   imports = [
@@ -20,6 +21,13 @@ in
     ./hardware-configuration.nix
     "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
     ./disko.nix
+  ];
+
+  # Override powertop with our custom master branch version
+  nixpkgs.overlays = [
+    (self: super: {
+      powertop = super.callPackage ./pkgs/powertop-master.nix { };
+    })
   ];
 
   boot = {
@@ -76,6 +84,7 @@ in
     pciutils # provides lspci
     nvme-cli # provides nvme
     usbutils # provides lsusb
+    powertop # powertop points to our custom master branch version via overlay
   ];
 
   users.users = {
