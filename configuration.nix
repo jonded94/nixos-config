@@ -113,9 +113,42 @@ in
       enable = true;
       role = "server";
       manifests = {
-        # librespeed = {
-        #   source = ./k8s/librespeed.yaml;
-        # };
+        fleet-gitrepo = {
+          content = {
+            apiVersion = "fleet.cattle.io/v1alpha1";
+            kind = "GitRepo";
+            metadata = {
+              name = "nixos-config";
+              namespace = "fleet-local";
+            };
+            spec = {
+              repo = "git@github.com:jonded94/nixos-config.git";
+              branch = "main";
+              paths = [ "charts/fleet-root" ];
+              pollingInterval = "1m";
+            };
+          };
+        };
+      };
+      autoDeployCharts = {
+        fleet-crd = {
+          enable = true;
+          name = "fleet-crd";
+          version = "0.14.0";
+          repo = "https://rancher.github.io/fleet-helm-charts/";
+          targetNamespace = "cattle-fleet-system";
+          createNamespace = true;
+          hash = "sha256-CWEkR1e9TOao3CLje4TFX57WNuFiZXCkDxq5i+he2gY=";
+        };
+        fleet = {
+          enable = true;
+          name = "fleet";
+          version = "0.14.0";
+          repo = "https://rancher.github.io/fleet-helm-charts/";
+          targetNamespace = "cattle-fleet-system";
+          createNamespace = true;
+          hash = "sha256-BsdFgm1ypCfsBwlqo0C8e+vyHqL09QgxqDEPepR8oEY=";
+        };
       };
     };
   };
