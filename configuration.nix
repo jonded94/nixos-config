@@ -31,7 +31,14 @@ in
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_testing;
+    kernelParams = [
+      "pcie_aspm=force"
+      "pcie_aspm.policy=powersupersave"
+      "pcie_port_pm=force"
+      "intel_idle.max_cstate=10"
+      "intel_pstate=passive"
+    ];
 
     # Enable mdadm support
     swraid = {
@@ -98,6 +105,10 @@ in
       enable = true;
       settings.PermitRootLogin = "yes";
     };
+    udev.extraRules = ''
+      ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:81:00.0", ATTR{remove}="1"
+      ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:80:1c.0", ATTR{remove}="1"
+    '';
     k3s = {
       enable = true;
       role = "server";
@@ -112,7 +123,7 @@ in
   # Power Management
   powerManagement = {
     enable = true;
-    cpuFreqGovernor = "powersave";
+    cpuFreqGovernor = "schedutil"; # EAS requires schedutil governor
     powertop.enable = true;
   };
 
