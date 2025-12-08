@@ -122,7 +122,7 @@ in
               namespace = "fleet-local";
             };
             spec = {
-              repo = "git@github.com:jonded94/nixos-config.git";
+              repo = "https://github.com/jonded94/nixos-config.git";
               branch = "main";
               paths = [ "charts/fleet-root" ];
               pollingInterval = "1m";

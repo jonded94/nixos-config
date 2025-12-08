@@ -4,7 +4,7 @@ metadata:
   name: kube-prometheus-stack
   namespace: fleet-local
 spec:
-  repo: git@github.com:jonded94/nixos-config.git
+  repo: https://github.com/jonded94/nixos-config.git
   branch: main
   paths:
     - charts/kube-prometheus-stack
