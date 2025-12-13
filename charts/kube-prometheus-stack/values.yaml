@@ -5,8 +5,7 @@ prometheus:
   ingress:
     enabled: true
     hosts:
-      - jonas-nixos.local
-    path: "/prometheus"
+      - prometheus.jonas-nixos.local
 
   prometheusSpec:
     retention: 30d
@@ -25,8 +24,7 @@ grafana:
   ingress:
     enabled: true
     hosts:
-      - jonas-nixos.local
-    path: "/grafana"
+      - grafana.jonas-nixos.local
 
 alertmanager:
   enabled: true
