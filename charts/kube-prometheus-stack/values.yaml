@@ -2,6 +2,12 @@
 # Customize these values as needed
 
 prometheus:
+  ingress:
+    enabled: true
+    hosts:
+      - jonas-nixos.local
+    path: "/prometheus"
+
   prometheusSpec:
     retention: 30d
     storageSpec:
@@ -15,6 +21,12 @@ prometheus:
 grafana:
   enabled: true
   adminPassword: changeme
+
+  ingress:
+    enabled: true
+    hosts:
+      - jonas-nixos.local
+    path: "/grafana"
 
 alertmanager:
   enabled: true
