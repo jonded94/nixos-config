@@ -1,0 +1,3 @@
+gitRepos:
+  - name: sealed-secrets
+  - name: kube-prometheus-stack

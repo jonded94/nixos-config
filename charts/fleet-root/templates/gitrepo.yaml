@@ -1,0 +1,18 @@
+{{- range .Values.gitRepos }}
+---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: {{ .name }}
+  namespace: {{ .namespace | default "fleet-local" }}
+spec:
+  repo: {{ .repo | default "https://github.com/jonded94/nixos-config.git" }}
+  branch: {{ .branch | default "main" }}
+  paths:
+{{- if .paths }}
+{{ toYaml .paths | indent 4 }}
+{{- else }}
+    - charts/{{ .name }}
+{{- end }}
+  pollingInterval: {{ .pollingInterval | default "1m" }}
+{{- end }}
