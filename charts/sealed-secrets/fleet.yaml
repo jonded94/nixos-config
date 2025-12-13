@@ -1,0 +1,9 @@
+defaultNamespace: kube-system
+helm:
+  repo: https://bitnami-labs.github.io/sealed-secrets
+  chart: sealed-secrets
+  releaseName: sealed-secrets
+  takeOwnership: false
+  maxHistory: 3
+  valuesFiles:
+    - values.yaml

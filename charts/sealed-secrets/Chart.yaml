@@ -1,0 +1,5 @@
+apiVersion: v2
+name: sealed-secrets
+description: Helm chart for the sealed-secrets controller
+type: application
+version: 0.1.0

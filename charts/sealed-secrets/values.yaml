@@ -1,0 +1,10 @@
+ingress:
+  enabled: true
+  hostname: sealed-secrets.jonas-nixos.local
+
+metrics:
+  serviceMonitor:
+    enabled: true
+
+  dashboards:
+    create: true
