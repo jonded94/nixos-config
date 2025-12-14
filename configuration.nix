@@ -125,7 +125,10 @@ in
               repo = "https://github.com/jonded94/nixos-config.git";
               branch = "main";
               paths = [ "charts/fleet-root" ];
-              pollingInterval = "1m";
+              pollingInterval = "1m0s";
+              correctDrift = {
+                enabled = true;
+              };
             };
           };
         };

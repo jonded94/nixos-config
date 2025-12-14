@@ -14,5 +14,7 @@ spec:
 {{- else }}
     - charts/{{ .name }}
 {{- end }}
-  pollingInterval: {{ .pollingInterval | default "1m" }}
+  pollingInterval: {{ .pollingInterval | default "1m0s" }}
+  correctDrift:
+    enabled: {{ .correctDrift | default true }}
 {{- end }}
